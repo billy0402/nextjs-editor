@@ -52,3 +52,10 @@ $title-font-size: (
   margin-right: auto;
   margin-left: auto;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #151515;
+    color: $color_white;
+  }
+}
