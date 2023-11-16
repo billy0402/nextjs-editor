@@ -17,6 +17,7 @@
   "dependencies": {
     "@monaco-editor/react": "4.6.0",
     "@reduxjs/toolkit": "2.0.1",
+    "@types/wicg-file-system-access": "2023.10.3",
     "next": "14.0.4",
     "katex": "0.16.9",
     "next-redux-wrapper": "8.1.0",

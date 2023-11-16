@@ -1,5 +1,6 @@
 import CodeEditor from '@/components/CodeEditor';
 import { FileTree } from '@/components/FileTree';
+import FolderSelect from '@/components/FolderSelect';
 import Sidebar from '@/components/Sidebar';
 import { Directory, File, Type, findFileByName } from '@/helpers/file-manager';
 import useFilesFromSandbox from '@/hooks/useFilesFromSandbox';
@@ -34,6 +35,10 @@ const HomePage: NextPage = () => {
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar>
+        <FolderSelect
+          setRootDir={setRootDir}
+          setSelectedFile={setSelectedFile}
+        />
         <FileTree
           rootDir={rootDir}
           selectedFile={selectedFile}
