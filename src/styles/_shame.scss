@@ -25,3 +25,17 @@
     list-style-type: decimal;
   }
 }
+
+.w-md-editor-footer {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #30363d;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-size: 0.85rem;
+
+  > p {
+    > span {
+      @include layoutSpaceLeft(1rem);
+    }
+  }
+}

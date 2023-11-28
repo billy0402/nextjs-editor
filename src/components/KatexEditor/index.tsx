@@ -181,6 +181,12 @@ c = \\pm\\sqrt{a^2 + b^2}
           },
         }}
       />
+      <footer className='w-md-editor-footer'>
+        <p>
+          <span>字數: {textExpression?.length}</span>
+          <span>行數: {textExpression?.split('\n').length}</span>
+        </p>
+      </footer>
     </article>
   );
 };
