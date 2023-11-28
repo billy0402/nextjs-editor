@@ -37,6 +37,7 @@ const HomePage: NextPage = () => {
       <Sidebar>
         <FolderSelect
           setRootDir={setRootDir}
+          // @ts-ignore
           setSelectedFile={setSelectedFile}
         />
         <FileTree
