@@ -173,7 +173,7 @@ c = \\pm\\sqrt{a^2 + b^2}
         value={textExpression}
         onChange={setTextExpression}
         commands={customCommands}
-        height='100%'
+        height={500}
         visibleDragbar={false}
         previewOptions={{
           // rehypePlugins: [[rehypeSanitize]],
