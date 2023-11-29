@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import LatexIcon from '@/public/images/markdown-editor/latex.svg';
 import * as commands from '@uiw/react-md-editor/commands';
 import katex from 'katex';
-import dynamic from 'next/dynamic';
+import { Margin, Options, Resolution, usePDF } from 'react-to-pdf';
 import { getCodeString } from 'rehype-rewrite';
 
 import '@uiw/react-markdown-preview/markdown.css';
@@ -14,6 +15,10 @@ import 'katex/dist/katex.css';
 
 const MDEditor = dynamic(
   () => import('@uiw/react-md-editor').then((mod) => mod.default),
+  { ssr: false },
+);
+const Markdown = dynamic(
+  () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
   { ssr: false },
 );
 
@@ -76,6 +81,43 @@ const customCommands = [
   commands.help,
 ];
 
+const options: Options = {
+  // default is `save`
+  // method: 'open',
+  // default is Resolution.MEDIUM = 3, which should be enough, higher values
+  // increases the image quality but also the size of the PDF, so be careful
+  // using values higher than 10 when having multiple pages generated, it
+  // might cause the page to crash or hang.
+  resolution: Resolution.HIGH,
+  page: {
+    // margin is in MM, default is Margin.NONE = 0
+    margin: Margin.SMALL,
+    // default is 'A4'
+    // format: 'letter',
+    // default is 'portrait'
+    // orientation: 'landscape',
+  },
+  canvas: {
+    // default is 'image/jpeg' for better size performance
+    mimeType: 'image/jpeg',
+    qualityRatio: 1,
+  },
+  // Customize any value passed to the jsPDF instance and html2canvas
+  // function. You probably will not need this and things can break,
+  // so use with caution.
+  // overrides: {
+  //   // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+  //   pdf: {
+  //     compress: true,
+  //   },
+  //   // see https://html2canvas.hertzen.com/configuration for more options
+  //   canvas: {
+  //     useCORS: true,
+  //     allowTaint: true,
+  //   },
+  // },
+};
+
 const KatexEditor = () => {
   const [textExpression, setTextExpression] = useState<string | undefined>(
     `\
@@ -121,8 +163,11 @@ c = \\pm\\sqrt{a^2 + b^2}
 \`\`\``,
   );
 
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+
   return (
     <article style={{ width: '100%' }}>
+      <button onClick={() => toPDF()}>Generate PDF</button>
       <MDEditor
         data-color-mode='dark'
         value={textExpression}
@@ -181,6 +226,13 @@ c = \\pm\\sqrt{a^2 + b^2}
           },
         }}
       />
+      <article
+        ref={targetRef}
+        className='w-md-editor-preview w-md-editor-pdf'
+        data-color-mode='dark'
+      >
+        <Markdown source={textExpression} />
+      </article>
       <footer className='w-md-editor-footer'>
         <p>
           <span>字數: {textExpression?.length}</span>
