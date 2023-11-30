@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -221,6 +221,38 @@ c = \\pm\\sqrt{a^2 + b^2}
                   />
                 );
               }
+
+              if (Array.isArray(children)) {
+                return (
+                  <code className={String(className)}>
+                    {children.map((child: React.ReactElement, index) => (
+                      <Fragment key={index}>
+                        {{
+                          ...child,
+                          props: {
+                            ...child.props,
+                            children: [
+                              <span
+                                key='span-line-number'
+                                className='line-number'
+                                style={{
+                                  width: `${
+                                    children.length.toString().length
+                                  }rem`,
+                                }}
+                              >
+                                {index + 1}
+                              </span>,
+                              ...child.props.children,
+                            ],
+                          },
+                        }}
+                      </Fragment>
+                    ))}
+                  </code>
+                );
+              }
+
               return <code className={String(className)}>{children}</code>;
             },
           },
