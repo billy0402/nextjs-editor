@@ -7,8 +7,10 @@ import LatexIcon from '@/public/images/markdown-editor/latex.svg';
 import * as commands from '@uiw/react-md-editor/commands';
 import katex from 'katex';
 import { Margin, Options, Resolution, usePDF } from 'react-to-pdf';
+import rehypeKatex from 'rehype-katex';
 import { getCodeString } from 'rehype-rewrite';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import remarkMath from 'remark-math';
 
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-md-editor/markdown-editor.css';
@@ -167,6 +169,10 @@ print('Hello, world!')!
 c = \\pm\\sqrt{a^2 + b^2}
 \`\`\`
 
+$$
+c = \\pm\\sqrt{a^2 + b^2}
+$$
+
 <br />
 
 <a name="old"></a>
@@ -189,6 +195,7 @@ c = \\pm\\sqrt{a^2 + b^2}
         height={500}
         visibleDragbar={false}
         previewOptions={{
+          remarkPlugins: [remarkMath],
           rehypePlugins: [
             [
               rehypeSanitize,
@@ -207,6 +214,7 @@ c = \\pm\\sqrt{a^2 + b^2}
                 },
               },
             ],
+            rehypeKatex,
           ],
           components: {
             code: ({
