@@ -8,6 +8,7 @@ import * as commands from '@uiw/react-md-editor/commands';
 import katex from 'katex';
 import { Margin, Options, Resolution, usePDF } from 'react-to-pdf';
 import { getCodeString } from 'rehype-rewrite';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-md-editor/markdown-editor.css';
@@ -146,21 +147,33 @@ x^2^
 2. item
 3. item
 
-\`console.log('Hello. world!');\`
+\`console.log('Hello, world!');\`
 
 \`\`\`
-console.log('Hello. world!');
+console.log('Hello, world!');
 \`\`\`
 
 \`\`\`javascript
-console.log('Hello. world!');
+console.log('Hello, world!');
+\`\`\`
+
+\`\`\`python
+print('Hello, world!')!
 \`\`\`
 
 ---
 
 \`\`\`latex
 c = \\pm\\sqrt{a^2 + b^2}
-\`\`\``,
+\`\`\`
+
+<br />
+
+<a name="old"></a>
+<h2 id="current">Current</h2>
+<p>Link to <a href="#current">current</a>, link to <a href="#old">old</a>.
+
+<IFRAME SRC=\"javascript:javascript:alert(window.origin);\"></IFRAME>`,
   );
 
   const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
@@ -176,7 +189,25 @@ c = \\pm\\sqrt{a^2 + b^2}
         height={500}
         visibleDragbar={false}
         previewOptions={{
-          // rehypePlugins: [[rehypeSanitize]],
+          rehypePlugins: [
+            [
+              rehypeSanitize,
+              {
+                ...defaultSchema,
+                attributes: {
+                  ...defaultSchema.attributes,
+                  span: [
+                    ...(defaultSchema.attributes?.span ?? []),
+                    ['className'],
+                  ],
+                  code: [
+                    ...(defaultSchema.attributes?.code ?? []),
+                    ['className'],
+                  ],
+                },
+              },
+            ],
+          ],
           components: {
             code: ({
               inline,
