@@ -30,10 +30,10 @@
     "redux": "5.0.0",
     "rehype-katex": "7.0.0",
     "rehype-sanitize": "6.0.0",
-    "remark-math": "6.0.0"
+    "remark-math": "6.0.0",
+    "remark-supersub": "1.0.0"
   },
   "devDependencies": {
-    "@types/wicg-file-system-access": "2023.10.3",
     "@types/katex": "0.16.6",
     "@testing-library/jest-dom": "6.1.5",
     "@testing-library/react": "14.1.2",
@@ -41,6 +41,7 @@
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "@types/react-dom": "18.2.18",
+    "@types/wicg-file-system-access": "2023.10.3",
     "eslint": "8.56.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.1.0",

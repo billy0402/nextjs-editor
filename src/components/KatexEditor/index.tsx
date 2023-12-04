@@ -10,7 +10,9 @@ import { Margin, Options, Resolution, usePDF } from 'react-to-pdf';
 import rehypeKatex from 'rehype-katex';
 import { getCodeString } from 'rehype-rewrite';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import remarkSupersub from 'remark-supersub';
 
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-md-editor/markdown-editor.css';
@@ -195,7 +197,11 @@ $$
         height={500}
         visibleDragbar={false}
         previewOptions={{
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [
+            remarkSupersub,
+            remarkMath,
+            [remarkGfm, { singleTilde: false }],
+          ],
           rehypePlugins: [
             [
               rehypeSanitize,
