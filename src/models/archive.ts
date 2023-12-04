@@ -10,6 +10,7 @@ type Archive = {
   type: ArchiveType; // 檔案類型
   depth: number; // 檔案深度
   parentId?: string; // 父目錄，如果為根目錄則undefined
+  readOnly: boolean; // 是否為唯讀
 };
 
 export type Directory = Archive & {

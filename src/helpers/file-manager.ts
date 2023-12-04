@@ -15,6 +15,7 @@ export function buildFileTree(data: any): Directory {
     type: ArchiveType.DIRECTORY,
     depth: 0,
     parentId: undefined,
+    readOnly: false,
     dirs: [],
     files: [],
   };
@@ -26,6 +27,7 @@ export function buildFileTree(data: any): Directory {
       type: ArchiveType.DIRECTORY,
       depth: 0,
       parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
+      readOnly: false,
       dirs: [],
       files: [],
     };
@@ -40,6 +42,7 @@ export function buildFileTree(data: any): Directory {
       type: ArchiveType.FILE,
       depth: 0,
       parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
+      readOnly: false,
       content: item.code,
     };
     cache.set(file.id, file);

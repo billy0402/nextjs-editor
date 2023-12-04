@@ -18,7 +18,13 @@ const CodeEditor = ({ selectedFile }: { selectedFile: File | undefined }) => {
         fontSize: 16,
       }}
     >
-      <Editor height='100vh' language={language} value={code} theme='vs-dark' />
+      <Editor
+        height='100vh'
+        language={language}
+        value={code}
+        theme='vs-dark'
+        options={{ readOnly: selectedFile.readOnly }}
+      />
     </div>
   );
 };

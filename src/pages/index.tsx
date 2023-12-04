@@ -17,6 +17,7 @@ const dummyDir: Directory = {
   type: ArchiveType.DUMMY,
   depth: 0,
   parentId: undefined,
+  readOnly: false,
   dirs: [],
   files: [],
 };
