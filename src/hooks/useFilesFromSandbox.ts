@@ -1,4 +1,6 @@
-import { buildFileTree, Directory } from '@/helpers/file-manager';
+import { fakeFiles } from '@/fixtures/fake-files';
+import { buildFileTree } from '@/helpers/file-manager';
+import type { Directory } from '@/models/archive';
 import { useEffect } from 'react';
 
 const useFilesFromSandbox = (
@@ -6,6 +8,9 @@ const useFilesFromSandbox = (
   callback: (dir: Directory) => void,
 ) => {
   useEffect(() => {
+    callback(fakeFiles);
+    return;
+
     fetch('https://codesandbox.io/api/v1/sandboxes/' + id)
       .then((response) => response.json())
       .then(({ data }) => {

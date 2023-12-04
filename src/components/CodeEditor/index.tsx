@@ -1,4 +1,4 @@
-import { File } from '@/helpers/file-manager';
+import type { File } from '@/models/archive';
 import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ selectedFile }: { selectedFile: File | undefined }) => {

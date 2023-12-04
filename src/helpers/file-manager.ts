@@ -1,25 +1,4 @@
-export enum Type {
-  FILE, // 文件
-  DIRECTORY, // 目錄
-  DUMMY, // 虛擬檔案（用於未成功取得到檔案時展示）
-}
-
-interface CommonProps {
-  id: string; // 文件id
-  type: Type; // 檔案類型
-  name: string; // 名稱
-  parentId: string | undefined; // 父級目錄，如果為根目錄則undefined
-  depth: number; // 檔案深度
-}
-
-export interface File extends CommonProps {
-  content: string; // 檔案內容
-}
-
-export interface Directory extends CommonProps {
-  files: File[];
-  dirs: Directory[];
-}
+import { ArchiveType, Directory, File } from '@/models/archive';
 
 /**
  * 建立文件樹
@@ -33,9 +12,9 @@ export function buildFileTree(data: any): Directory {
   let rootDir: Directory = {
     id: '0',
     name: 'root',
-    parentId: undefined,
-    type: Type.DIRECTORY,
+    type: ArchiveType.DIRECTORY,
     depth: 0,
+    parentId: undefined,
     dirs: [],
     files: [],
   };
@@ -44,9 +23,9 @@ export function buildFileTree(data: any): Directory {
     let dir: Directory = {
       id: item.shortid,
       name: item.title,
-      parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
-      type: Type.DIRECTORY,
+      type: ArchiveType.DIRECTORY,
       depth: 0,
+      parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
       dirs: [],
       files: [],
     };
@@ -58,9 +37,9 @@ export function buildFileTree(data: any): Directory {
     let file: File = {
       id: item.shortid,
       name: item.title,
-      parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
-      type: Type.FILE,
+      type: ArchiveType.FILE,
       depth: 0,
+      parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
       content: item.code,
     };
     cache.set(file.id, file);
@@ -69,11 +48,12 @@ export function buildFileTree(data: any): Directory {
   cache.forEach((value, key) => {
     // '0'表示檔案或目錄位於根目錄
     if (value.parentId === '0') {
-      if (value.type === Type.DIRECTORY) rootDir.dirs.push(value as Directory);
+      if (value.type === ArchiveType.DIRECTORY)
+        rootDir.dirs.push(value as Directory);
       else rootDir.files.push(value as File);
     } else {
       const parentDir = cache.get(value.parentId as string) as Directory;
-      if (value.type === Type.DIRECTORY)
+      if (value.type === ArchiveType.DIRECTORY)
         parentDir.dirs.push(value as Directory);
       else parentDir.files.push(value as File);
     }

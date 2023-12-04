@@ -1,11 +1,12 @@
 import { getIcon } from '@/components/Icon';
-import { Directory, File, sortDir, sortFile } from '@/helpers/file-manager';
+import { sortDir, sortFile } from '@/helpers/file-manager';
+import type { Directory, File } from '@/models/archive';
 import React, { useState } from 'react';
 
 type FileTreeProps = {
-  rootDir: Directory; // 根目录
-  selectedFile: File | undefined; // 当前选中文件
-  onSelect: (file: File) => void; // 更改选中时触发事件
+  rootDir: Directory; // 根目錄
+  selectedFile: File | undefined; // 目前選取文件
+  onSelect: (file: File) => void; // 更改選取時觸發事件
 };
 
 export const FileTree = (props: FileTreeProps) => {
@@ -13,9 +14,9 @@ export const FileTree = (props: FileTreeProps) => {
 };
 
 type SubTreeProps = {
-  directory: Directory; // 根目录
-  selectedFile: File | undefined; // 当前选中文件
-  onSelect: (file: File) => void; // 更改选中时触发事件
+  directory: Directory; // 根目錄
+  selectedFile: File | undefined; // 目前選取文件
+  onSelect: (file: File) => void; // 更改選取時觸發事件
 };
 
 const SubTree = (props: SubTreeProps) => {
@@ -49,10 +50,10 @@ const FileDiv = ({
   selectedFile,
   onClick,
 }: {
-  file: File | Directory; // 当前文件
-  icon?: string; // 图标名称
-  selectedFile: File | undefined; // 选中的文件
-  onClick: () => void; // 点击事件
+  file: File | Directory; // 目前文件
+  icon?: string; // 圖示名稱
+  selectedFile: File | undefined; // 選取的文件
+  onClick: () => void; // 點選事件
 }) => {
   const isSelected = (selectedFile && selectedFile.id === file.id) as boolean;
   const depth = file.depth;
@@ -63,6 +64,7 @@ const FileDiv = ({
         alignItems: 'center',
         paddingLeft: depth * 16,
         backgroundColor: isSelected ? '#242424' : 'transparent',
+        cursor: 'pointer',
         // ':hover': {
         //   cursor: 'pointer',
         //   backgroundColor: '#242424',
@@ -81,9 +83,9 @@ const DirDiv = ({
   selectedFile,
   onSelect,
 }: {
-  directory: Directory; // 当前目录
-  selectedFile: File | undefined; // 选中的文件
-  onSelect: (file: File) => void; // 点击事件
+  directory: Directory; // 目前目錄
+  selectedFile: File | undefined; // 選取的文件
+  onSelect: (file: File) => void; // 點選事件
 }) => {
   let defaultOpen = false;
   if (selectedFile) defaultOpen = isChildSelected(directory, selectedFile);

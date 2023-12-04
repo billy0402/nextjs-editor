@@ -1,12 +1,13 @@
-import { Directory, Type } from '@/helpers/file-manager';
 import { openDirectory } from '@/helpers/open-directory';
+import type { Directory } from '@/models/archive';
+import { ArchiveType } from '@/models/archive';
 
 type Result = { result: Item[] } & Partial<Record<string, { result: Item[] }>>;
 
 type Item = {
   id: string;
   name: string;
-  type: Type;
+  type: ArchiveType;
   depth: number;
   path: string;
   dirs: Item[];
@@ -35,7 +36,10 @@ const filePathsToTree = (filePaths: string[], files: File[]) => {
         context.result.push({
           id: Math.random().toString(),
           name,
-          type: context[name]!.result.length > 0 ? Type.FILE : Type.DIRECTORY,
+          type:
+            context[name]!.result.length > 0
+              ? ArchiveType.FILE
+              : ArchiveType.DIRECTORY,
           depth: index + 1,
           path: fullPath,
           dirs: context[name]!.result,
