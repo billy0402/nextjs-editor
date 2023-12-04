@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import remarkSupersub from 'remark-supersub';
+import { PluggableList } from 'unified';
 
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-md-editor/markdown-editor.css';
@@ -161,6 +162,14 @@ console.log('Hello, world!');
 console.log('Hello, world!');
 \`\`\`
 
+\`\`\`javascript showLineNumbers {1,3-4}
+console.log('Hello, world!');
+console.log('Hello, world!');
+console.log('Hello, world!');
+console.log('Hello, world!');
+console.log('Hello, world!');
+\`\`\`
+
 \`\`\`python
 print('Hello, world!')!
 \`\`\`
@@ -212,6 +221,7 @@ $$
                   span: [
                     ...(defaultSchema.attributes?.span ?? []),
                     ['className'],
+                    ['line'],
                   ],
                   code: [
                     ...(defaultSchema.attributes?.code ?? []),
@@ -222,6 +232,10 @@ $$
             ],
             rehypeKatex,
           ],
+          pluginsFilter: (type: 'rehype' | 'remark', plugin: PluggableList) => {
+            console.log(type, plugin);
+            return plugin;
+          },
           components: {
             code: ({
               inline,
@@ -267,36 +281,36 @@ $$
                 );
               }
 
-              if (Array.isArray(children)) {
-                return (
-                  <code className={String(className)}>
-                    {children.map((child: React.ReactElement, index) => (
-                      <Fragment key={index}>
-                        {{
-                          ...child,
-                          props: {
-                            ...child.props,
-                            children: [
-                              <span
-                                key='span-line-number'
-                                className='line-number'
-                                style={{
-                                  width: `${
-                                    children.length.toString().length
-                                  }rem`,
-                                }}
-                              >
-                                {index + 1}
-                              </span>,
-                              ...child.props.children,
-                            ],
-                          },
-                        }}
-                      </Fragment>
-                    ))}
-                  </code>
-                );
-              }
+              // if (Array.isArray(children)) {
+              //   return (
+              //     <code className={String(className)}>
+              //       {children.map((child: React.ReactElement, index) => (
+              //         <Fragment key={index}>
+              //           {{
+              //             ...child,
+              //             props: {
+              //               ...child.props,
+              //               children: [
+              //                 <span
+              //                   key='span-line-number'
+              //                   className='line-number'
+              //                   style={{
+              //                     width: `${
+              //                       children.length.toString().length
+              //                     }rem`,
+              //                   }}
+              //                 >
+              //                   {index + 1}
+              //                 </span>,
+              //                 ...child.props.children,
+              //               ],
+              //             },
+              //           }}
+              //         </Fragment>
+              //       ))}
+              //     </code>
+              //   );
+              // }
 
               return <code className={String(className)}>{children}</code>;
             },

@@ -25,15 +25,15 @@
     list-style-type: decimal;
   }
 
-  pre {
-    span.line-number {
-      display: inline-flex;
-      justify-content: flex-end;
-      margin-right: 0.5rem;
-      padding: 0 0.5rem;
-      border-right: 2px solid $color_security;
-    }
-  }
+  // pre {
+  //   span.line-number {
+  //     display: inline-flex;
+  //     justify-content: flex-end;
+  //     margin-right: 0.5rem;
+  //     padding: 0 0.5rem;
+  //     border-right: 2px solid $color_security;
+  //   }
+  // }
 }
 
 .w-md-editor-footer {
