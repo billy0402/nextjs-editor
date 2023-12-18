@@ -2,6 +2,7 @@ import CodeEditor from '@/components/CodeEditor';
 import { FileTree } from '@/components/FileTree';
 import FolderSelect from '@/components/FolderSelect';
 import Sidebar from '@/components/Sidebar';
+import Tabs from '@/components/Tabs/Tabs';
 import { findFileByName } from '@/helpers/file-manager';
 import useFilesFromSandbox from '@/hooks/useFilesFromSandbox';
 import type { Directory, File } from '@/models/archive';
@@ -25,15 +26,26 @@ const dummyDir: Directory = {
 const HomePage: NextPage = () => {
   const [rootDir, setRootDir] = useState(dummyDir);
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
+  const [files, setFiles] = useState<File[]>([]);
 
   useFilesFromSandbox(CURRENT_SANDBOX_ID, (root) => {
     if (!selectedFile) {
       setSelectedFile(findFileByName(root, 'index.tsx'));
     }
     setRootDir(root);
+
+    if (selectedFile && !files.find((file) => file.id === selectedFile.id)) {
+      setFiles([...files, selectedFile]);
+    }
   });
 
-  const onSelect = (file: File) => setSelectedFile(file);
+  const onSelect = (file: File) => {
+    setSelectedFile(file);
+
+    if (file && !files.find((_file) => _file.id === file.id)) {
+      setFiles([...files, file]);
+    }
+  };
 
   return (
     <div style={{ display: 'flex' }}>
@@ -49,7 +61,14 @@ const HomePage: NextPage = () => {
           onSelect={onSelect}
         />
       </Sidebar>
-      <CodeEditor selectedFile={selectedFile} />
+      <article className='code-container'>
+        <Tabs
+          files={files}
+          setFiles={setFiles}
+          setSelectedFile={setSelectedFile}
+        />
+        <CodeEditor selectedFile={selectedFile} />
+      </article>
     </div>
   );
 };

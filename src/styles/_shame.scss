@@ -56,3 +56,32 @@
   width: 210mm !important;
   height: max-content;
 }
+
+.code-container {
+  width: calc(100% - 250px);
+
+  @extend %flex-column;
+}
+
+.tabs {
+  overflow-y: auto;
+
+  @extend %flex-row-center;
+
+  &__tab {
+    padding: $margin_small/2 $margin_small;
+    border: 0.5px solid rgba($color_line, 0.3);
+    border-radius: $radius-size_base $radius-size_base 0 0;
+    background-color: #30363d;
+    font-size: 0.75rem;
+    cursor: pointer;
+
+    @extend %flex-row-center;
+
+    > a {
+      display: inline-flex;
+      margin-left: 5px;
+      font-size: 1rem;
+    }
+  }
+}

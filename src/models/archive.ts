@@ -7,6 +7,7 @@ export enum ArchiveType {
 type Archive = {
   id: string; // 文件id
   name: string; // 名稱
+  fullPath: string; // 完整路徑
   type: ArchiveType; // 檔案類型
   depth: number; // 檔案深度
   parentId?: string; // 父目錄，如果為根目錄則undefined

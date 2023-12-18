@@ -3,6 +3,7 @@ import { ArchiveType, type Directory } from '@/models/archive';
 export const fakeFiles: Directory = {
   id: '0',
   name: 'root',
+  fullPath: '',
   type: ArchiveType.DIRECTORY,
   depth: 0,
   parentId: undefined,
@@ -11,6 +12,7 @@ export const fakeFiles: Directory = {
     {
       id: 'H1rMWpafrq',
       name: 'helpers',
+      fullPath: 'helpers',
       type: ArchiveType.DIRECTORY,
       depth: 1,
       parentId: '0',
@@ -20,6 +22,7 @@ export const fakeFiles: Directory = {
         {
           id: 'Hkfgz-TpfS9',
           name: 'counter.js',
+          fullPath: 'helpers/counter.js',
           type: ArchiveType.FILE,
           depth: 2,
           parentId: 'H1rMWpafrq',
@@ -56,6 +59,7 @@ module.exports = Counter;
     {
       id: 'Sy4-zWppMr5',
       name: 'main.js',
+      fullPath: 'main.js',
       type: ArchiveType.FILE,
       depth: 1,
       parentId: '0',
@@ -76,6 +80,7 @@ console.log('end:', counter.getCount());
     {
       id: 'Sy4-zWppMr6',
       name: 'README.md',
+      fullPath: 'README.md',
       type: ArchiveType.FILE,
       depth: 1,
       parentId: '0',
