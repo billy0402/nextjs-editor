@@ -15,6 +15,7 @@ const CURRENT_SANDBOX_ID = 'ww9kis';
 const dummyDir: Directory = {
   id: '1',
   name: 'loading...',
+  fullPath: '',
   type: ArchiveType.DUMMY,
   depth: 0,
   parentId: undefined,

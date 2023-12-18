@@ -12,6 +12,7 @@ export function buildFileTree(data: any): Directory {
   let rootDir: Directory = {
     id: '0',
     name: 'root',
+    fullPath: '',
     type: ArchiveType.DIRECTORY,
     depth: 0,
     parentId: undefined,
@@ -24,6 +25,7 @@ export function buildFileTree(data: any): Directory {
     let dir: Directory = {
       id: item.shortid,
       name: item.title,
+      fullPath: item.title,
       type: ArchiveType.DIRECTORY,
       depth: 0,
       parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
@@ -39,6 +41,7 @@ export function buildFileTree(data: any): Directory {
     let file: File = {
       id: item.shortid,
       name: item.title,
+      fullPath: item.title,
       type: ArchiveType.FILE,
       depth: 0,
       parentId: item.directory_shortid === null ? '0' : item.directory_shortid,
