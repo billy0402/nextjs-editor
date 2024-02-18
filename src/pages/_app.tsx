@@ -13,7 +13,7 @@ const App = ({ Component, ...pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <Head>
-        <title>Next.js Template</title>
+        <title>Next.js Editor</title>
       </Head>
       <Layout>
         <Component {...props.pageProps} />
