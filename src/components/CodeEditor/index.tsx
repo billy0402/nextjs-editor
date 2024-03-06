@@ -1,7 +1,10 @@
+import useThemeDetector from '@/hooks/useThemeDetector';
 import type { File } from '@/models/archive';
 import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ selectedFile }: { selectedFile: File | undefined }) => {
+  const isDarkTheme = useThemeDetector();
+
   if (!selectedFile) return null;
 
   const code = selectedFile.content;
@@ -16,7 +19,7 @@ const CodeEditor = ({ selectedFile }: { selectedFile: File | undefined }) => {
         height='100vh'
         language={language}
         value={code}
-        theme='vs-dark'
+        theme={isDarkTheme ? 'vs-dark' : 'vs-light'}
         options={{ readOnly: selectedFile.readOnly }}
       />
     </div>

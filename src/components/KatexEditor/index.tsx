@@ -15,6 +15,7 @@ import remarkMath from 'remark-math';
 import remarkSupersub from 'remark-supersub';
 import { PluggableList } from 'unified';
 
+import useThemeDetector from '@/hooks/useThemeDetector';
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-md-editor/markdown-editor.css';
 import 'katex/dist/katex.css';
@@ -195,11 +196,13 @@ $$
 
   const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
 
+  const isDarkTheme = useThemeDetector();
+
   return (
     <article style={{ width: '100%' }}>
       <button onClick={() => toPDF()}>Generate PDF</button>
       <MDEditor
-        data-color-mode='dark'
+        data-color-mode={isDarkTheme ? 'dark' : 'light'}
         value={textExpression}
         onChange={setTextExpression}
         commands={customCommands}

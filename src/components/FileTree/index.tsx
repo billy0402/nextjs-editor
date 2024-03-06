@@ -1,5 +1,6 @@
 import { getIcon } from '@/components/Icon';
 import { sortDir, sortFile } from '@/helpers/file-manager';
+import useThemeDetector from '@/hooks/useThemeDetector';
 import type { Directory, File } from '@/models/archive';
 import React, { useState } from 'react';
 
@@ -57,13 +58,19 @@ const FileDiv = ({
 }) => {
   const isSelected = (selectedFile && selectedFile.id === file.id) as boolean;
   const depth = file.depth;
+  const isDarkTheme = useThemeDetector();
+
   return (
     <div
       style={{
         display: 'flex',
         alignItems: 'center',
         paddingLeft: depth * 16,
-        backgroundColor: isSelected ? '#242424' : 'transparent',
+        backgroundColor: isSelected
+          ? isDarkTheme
+            ? '#242424'
+            : '#ededed'
+          : 'transparent',
         cursor: 'pointer',
         // ':hover': {
         //   cursor: 'pointer',
