@@ -1,4 +1,4 @@
-# nextjs-editor
+# [nextjs-editor](https://billy0402.github.io/nextjs-editor/)
 
 ## environment
 
@@ -9,6 +9,15 @@
 - [React.js 18.2.0](https://react.dev/)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## screenshots
+
+| type               | screenshot                                                        |
+| ------------------ | ----------------------------------------------------------------- |
+| Markdown Editor    | ![Markdown Editor](./docs/images/screenshots/markdown-editor.png) |
+| Ace Editor         | ![Ace Editor](./docs/images/screenshots/ace-editor.png)           |
+| Monaco Editor      | ![Angular Dart](./docs/images/screenshots/monaco-editor.png)      |
+| Code Mirror Editor | ![Angular Dart](./docs/images/screenshots/code-mirror-editor.png) |
 
 ## Installation
 
