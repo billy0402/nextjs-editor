@@ -94,5 +94,13 @@
       border-color: $color_line;
       background-color: #30363d;
     }
+
+    &.active {
+      background-color: darken($color: $color_line, $amount: 30);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: darken($color: #30363d, $amount: 30);
+      }
+    }
   }
 }

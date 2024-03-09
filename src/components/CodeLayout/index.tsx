@@ -68,6 +68,7 @@ const CodeLayout = ({ selectedFile, setSelectedFile, children }: Props) => {
       <article className='code-container'>
         <Tabs
           files={files}
+          selectedFile={selectedFile}
           setFiles={setFiles}
           setSelectedFile={setSelectedFile}
         />

@@ -5,11 +5,13 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 type Props = {
   files: File[];
+  selectedFile: File | undefined;
+
   setFiles: (files: File[]) => void;
   setSelectedFile: (value: File | undefined) => void;
 };
 
-const Tabs = ({ files, setFiles, setSelectedFile }: Props) => {
+const Tabs = ({ files, selectedFile, setFiles, setSelectedFile }: Props) => {
   const listRef = useRef<HTMLUListElement>(null);
 
   const [startDrag, setStartDrag] = useState<string>();
@@ -19,7 +21,9 @@ const Tabs = ({ files, setFiles, setSelectedFile }: Props) => {
       {files.map((file) => (
         <li
           key={file.id}
-          className='tabs__tab'
+          className={`tabs__tab${
+            file.id === selectedFile?.id ? ' active' : ''
+          }`}
           onClick={() => setSelectedFile(file)}
           draggable
           onDragStart={(e) => {
