@@ -1,4 +1,4 @@
-import Editor from '@uiw/react-codemirror';
+import Editor, { EditorView } from '@uiw/react-codemirror';
 
 import { javascript } from '@codemirror/lang-javascript';
 
@@ -10,7 +10,13 @@ type Props = {
   selectedFile: File | undefined;
 };
 
-const extensions = [javascript({ jsx: true })];
+const FontSizeTheme = EditorView.theme({
+  '&': {
+    fontSize: '16px',
+  },
+});
+
+const extensions = [FontSizeTheme, javascript({ jsx: true })];
 
 const CodeMirrorEditor = ({ selectedFile }: Props) => {
   const isDarkTheme = useThemeDetector();

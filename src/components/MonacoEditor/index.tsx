@@ -23,7 +23,7 @@ const MonacoEditor = ({ selectedFile }: Props) => {
       language={language}
       value={code}
       height='100vh'
-      options={{ readOnly: selectedFile.readOnly }}
+      options={{ fontSize: 16, readOnly: selectedFile.readOnly }}
     />
   );
 };

@@ -40,6 +40,7 @@ const AceEditor = ({ selectedFile }: Props) => {
         enableSnippets: true,
         showLineNumbers: true,
         tabSize: 2,
+        fontSize: '16px',
       }}
       readOnly={selectedFile.readOnly}
     />

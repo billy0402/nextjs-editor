@@ -75,7 +75,7 @@ const CodeLayout = ({ selectedFile, setSelectedFile, children }: Props) => {
           setFiles={setFiles}
           setSelectedFile={setSelectedFile}
         />
-        <section style={{ fontSize: 16 }}>{children}</section>
+        <section>{children}</section>
       </article>
     </main>
   );
