@@ -4,20 +4,13 @@ import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 
 import CodeLayout from '@/components/CodeLayout';
-import { capitalize } from '@/helpers/string';
 import { File } from '@/models/archive';
+import { EditorType, editorTypeDisplay } from '@/models/editor-type';
 
 const MarkdownEditor = dynamic(() => import('@/components/MarkdownEditor'));
 const AceEditor = dynamic(() => import('@/components/AceEditor'));
 const MonacoEditor = dynamic(() => import('@/components/MonacoEditor'));
 const CodeMirrorEditor = dynamic(() => import('@/components/CodeMirrorEditor'));
-
-enum EditorType {
-  MARKDOWN = 'MARKDOWN',
-  ACE = 'ACE',
-  MONACO = 'MONACO',
-  CODE_MIRROR = 'CODE_MIRROR',
-}
 
 const editorTypes = Object.values(EditorType);
 
@@ -34,7 +27,7 @@ const HomePage: NextPage = () => {
             className={`tabs__tab${editorType === type ? ' active' : ''}`}
             onClick={() => setEditorType(type)}
           >
-            {capitalize(type)} Editor
+            {editorTypeDisplay[type]}
           </li>
         ))}
       </ul>
