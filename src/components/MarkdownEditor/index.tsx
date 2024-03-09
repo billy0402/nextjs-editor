@@ -200,7 +200,6 @@ $$
 
   return (
     <article style={{ width: '100%' }}>
-      <button onClick={() => toPDF()}>Generate PDF</button>
       <MDEditor
         data-color-mode={isDarkTheme ? 'dark' : 'light'}
         value={textExpression}
@@ -333,6 +332,9 @@ $$
           <span>行數: {textExpression?.split('\n').length}</span>
         </p>
       </footer>
+      <button className='btn margin-top' type='button' onClick={() => toPDF()}>
+        Generate PDF
+      </button>
     </article>
   );
 };

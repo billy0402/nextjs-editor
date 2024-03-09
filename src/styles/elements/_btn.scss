@@ -1,0 +1,44 @@
+.btn {
+  padding: 12px 24px;
+  border: 1px solid $color_line;
+  border-radius: $border-radius_layout;
+  color: $color_text;
+  font-size: 0.75rem;
+  cursor: pointer;
+
+  @include hoverBackgroundTransition($color_line);
+
+  @media (prefers-color-scheme: dark) {
+    color: $color_white;
+
+    @include hoverBackgroundTransition(#30363d);
+  }
+
+  &--large {
+    font-size: 1rem;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &--accent {
+    color: $color_accent;
+  }
+
+  &--security {
+    color: $color_security;
+  }
+
+  &--notice {
+    color: $color_notice;
+  }
+
+  &--danger {
+    color: $color_danger;
+  }
+}
