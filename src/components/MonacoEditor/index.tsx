@@ -1,25 +1,28 @@
 import Editor from '@monaco-editor/react';
 
+import { fileExtensionToLanguage, fileNameToExtension } from '@/helpers/file';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import type { File } from '@/models/archive';
 
-const MonacoEditor = ({ selectedFile }: { selectedFile: File | undefined }) => {
+type Props = {
+  selectedFile: File | undefined;
+};
+
+const MonacoEditor = ({ selectedFile }: Props) => {
   const isDarkTheme = useThemeDetector();
 
   if (!selectedFile) return null;
 
   const code = selectedFile.content;
-  let language = selectedFile.name.split('.').pop();
-
-  if (language === 'js' || language === 'jsx') language = 'javascript';
-  else if (language === 'ts' || language === 'tsx') language = 'typescript';
+  const fileExtension = fileNameToExtension(selectedFile.name);
+  const language = fileExtensionToLanguage(fileExtension);
 
   return (
     <Editor
-      height='100vh'
+      theme={isDarkTheme ? 'vs-dark' : 'vs-light'}
       language={language}
       value={code}
-      theme={isDarkTheme ? 'vs-dark' : 'vs-light'}
+      height='100vh'
       options={{ readOnly: selectedFile.readOnly }}
     />
   );

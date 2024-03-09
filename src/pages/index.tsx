@@ -1,14 +1,20 @@
+import { useState } from 'react';
+
+import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
+
 import CodeLayout from '@/components/CodeLayout';
-import MarkdownEditor from '@/components/MarkdownEditor';
-import MonacoEditor from '@/components/MonacoEditor';
 import { capitalize } from '@/helpers/string';
 import { File } from '@/models/archive';
-import type { NextPage } from 'next';
-import { useState } from 'react';
+
+const MarkdownEditor = dynamic(() => import('@/components/MarkdownEditor'));
+const AceEditor = dynamic(() => import('@/components/AceEditor'));
+const MonacoEditor = dynamic(() => import('@/components/MonacoEditor'));
 
 enum EditorType {
   MARKDOWN = 'MARKDOWN',
-  CODE = 'CODE',
+  ACE = 'ACE',
+  MONACO = 'MONACO',
 }
 
 const editorTypes = Object.values(EditorType);
@@ -36,7 +42,12 @@ const HomePage: NextPage = () => {
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
         >
-          <MonacoEditor selectedFile={selectedFile} />
+          {editorType === EditorType.ACE && (
+            <AceEditor selectedFile={selectedFile} />
+          )}
+          {editorType === EditorType.MONACO && (
+            <MonacoEditor selectedFile={selectedFile} />
+          )}
         </CodeLayout>
       )}
     </article>
