@@ -10,11 +10,13 @@ import { File } from '@/models/archive';
 const MarkdownEditor = dynamic(() => import('@/components/MarkdownEditor'));
 const AceEditor = dynamic(() => import('@/components/AceEditor'));
 const MonacoEditor = dynamic(() => import('@/components/MonacoEditor'));
+const CodeMirrorEditor = dynamic(() => import('@/components/CodeMirrorEditor'));
 
 enum EditorType {
   MARKDOWN = 'MARKDOWN',
   ACE = 'ACE',
   MONACO = 'MONACO',
+  CODE_MIRROR = 'CODE_MIRROR',
 }
 
 const editorTypes = Object.values(EditorType);
@@ -47,6 +49,9 @@ const HomePage: NextPage = () => {
           )}
           {editorType === EditorType.MONACO && (
             <MonacoEditor selectedFile={selectedFile} />
+          )}
+          {editorType === EditorType.CODE_MIRROR && (
+            <CodeMirrorEditor selectedFile={selectedFile} />
           )}
         </CodeLayout>
       )}
