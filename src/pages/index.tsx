@@ -1,5 +1,5 @@
 import CodeLayout from '@/components/CodeLayout';
-import KatexEditor from '@/components/KatexEditor';
+import MarkdownEditor from '@/components/MarkdownEditor';
 import MonacoEditor from '@/components/MonacoEditor';
 import { File } from '@/models/archive';
 import type { NextPage } from 'next';
@@ -38,7 +38,7 @@ const HomePage: NextPage = () => {
           <MonacoEditor selectedFile={selectedFile} />
         </CodeLayout>
       )}
-      {editorType === EditorType.MARKDOWN && <KatexEditor />}
+      {editorType === EditorType.MARKDOWN && <MarkdownEditor />}
     </article>
   );
 };

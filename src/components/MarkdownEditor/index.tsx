@@ -125,7 +125,7 @@ const options: Options = {
   // },
 };
 
-const KatexEditor = () => {
+const MarkdownEditor = () => {
   const [textExpression, setTextExpression] = useState<string | undefined>(
     `\
 # Header
@@ -337,4 +337,4 @@ $$
   );
 };
 
-export default KatexEditor;
+export default MarkdownEditor;
