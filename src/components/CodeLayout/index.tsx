@@ -34,7 +34,10 @@ const CodeLayout = ({ selectedFile, setSelectedFile, children }: Props) => {
 
   useFilesFromSandbox(CURRENT_SANDBOX_ID, (root) => {
     if (!selectedFile) {
-      setSelectedFile(findFileByName(root, 'index.tsx'));
+      const file = findFileByName(root, 'main.js');
+      if (!file) return;
+      setSelectedFile(file);
+      setFiles([file]);
     }
     setRootDir(root);
 
